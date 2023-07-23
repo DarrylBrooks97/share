@@ -7,9 +7,13 @@ import BaseToaster from "~/components/BaseToaster"
 import { cn } from "~/lib/utils"
 
 const inter = Inter({ subsets: ["latin"] })
+export const runtime = "edge"
 
 export const metadata: Metadata = {
-  title: "Share",
+  title: {
+    default: "Share",
+    template: "%s | Share",
+  },
   description: "Share your music from the edge 🪐",
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL as string),
   robots: {
