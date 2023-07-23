@@ -24,17 +24,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${song.name}`,
-    description: "Share music with friends & family",
+    description: "Share your music from the edge 🪐",
     openGraph: {
       type: "website",
       title: "Share",
-      description: "Share music with friends & family",
+      description: "Share your music from the edge 🪐",
       images: [{ url: ogImage }],
       url: `https://share-chi.vercel.app/song/${slug}`,
     },
     twitter: {
       title: "Share",
-      description: "Share music with friends & family",
+      description: "Share your music from the edge 🪐",
       card: "summary_large_image",
       images: [ogImage],
       creator: "@darryl_codes",
