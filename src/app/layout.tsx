@@ -2,6 +2,8 @@ import "./globals.css"
 
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import Link from "next/link"
+import BaseToaster from "~/components/BaseToaster"
 import { cn } from "~/lib/utils"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -39,7 +41,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           "mx-auto flex h-screen w-full max-w-5xl flex-col space-y-6 bg-black p-3"
         )}
       >
-        <main className="h-full w-full">{children}</main>
+        <div className="flex h-fit w-full max-w-5xl">
+          <Link href="/">
+            <p className="text-2xl font-bold text-white">Share</p>
+          </Link>
+        </div>
+        <main className="h-full w-full">
+          {children}
+          <BaseToaster />
+        </main>
       </body>
     </html>
   )
