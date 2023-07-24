@@ -219,7 +219,7 @@ export default function AddSongForm() {
       </Dialog>
       <form onSubmit={handleAction as any} className="flex w-full items-center justify-between">
         {/** SongLinkSearch */}
-        <div className="w-72 md:w-3/4">
+        <div className="md:3/4 w-4/6">
           <input
             name="url"
             className="border-white-400 w-full rounded-md border border-opacity-80 bg-transparent p-2 text-white duration-200 ease-in-out focus:border focus:outline-none focus:ring-1 focus:ring-white"
@@ -231,7 +231,7 @@ export default function AddSongForm() {
           type="submit"
           disabled={isLoading}
           className={cn(
-            "rounded-md border border-white border-opacity-80 bg-transparent px-3 py-2 text-white duration-150 ease-in-out hover:bg-slate-800",
+            "whitespace-nowrap rounded-md border border-white border-opacity-80 bg-transparent px-3 py-2 text-white duration-150 ease-in-out hover:bg-slate-800",
             isLoading && "animate-pulse"
           )}
         >

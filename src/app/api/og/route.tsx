@@ -7,20 +7,19 @@ export const runtime = "edge"
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
-  const { slug } = Object.fromEntries(searchParams.entries())
+  const { slug: id } = Object.fromEntries(searchParams.entries())
 
   const spotiy = new Spotify()
-  const data = await spotiy.getTrack(slug)
+  const { name, album, artists } = await spotiy.getTrack(id)
 
   const [shareCount] = await query<number>(({ count }) => {
     count.songs.where = {
       link: {
-        contains: slug,
+        contains: id,
       },
     }
   })
 
-  const { name, album, artists } = data
   const photo = album.images[0].url
   const artistNames = artists.map((artist: any) => artist.name).join(", ")
   const albumName = album.name

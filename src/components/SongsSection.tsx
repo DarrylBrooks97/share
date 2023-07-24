@@ -1,29 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import { Song, Songs } from "@ronin/playground"
+import { Songs } from "@ronin/playground"
+import { getPlatformImage, splitLink } from "~/lib/utils"
 import { motion } from "framer-motion"
 
 import Image from "./ui/image"
-
-export const getPlatformImage = (song: Song) => {
-  switch (song.platform) {
-    case "spotify":
-      return "/spotify.png"
-    case "apple":
-      return "/apple.png"
-    default:
-      return "/spotify.png"
-  }
-}
-
-export const splitLink = (link: string, position: string = "start") => {
-  if (link.includes("music.apple.com")) {
-    return link.split("$")[position === "start" ? 0 : 1]
-  }
-
-  return link
-}
 
 export default function SongSection({ songs }: { songs: Songs }) {
   const getId = (link: string) => {
@@ -56,10 +38,10 @@ export default function SongSection({ songs }: { songs: Songs }) {
               fill
             />
           </div>
-          <div className="ml-3 flex h-fit max-w-fit grow flex-col justify-between text-ellipsis">
-            <Link href={`/song/${getId(song.link)}`} className="flex items-center">
-              <p className="text-lg">{song.name}</p>
-              <p className="ml-3 text-sm text-gray-400">Get link</p>
+          <div className="ml-3 flex h-fit w-full grow flex-col justify-between">
+            <Link href={`/song/${getId(song.link)}`} className="flex max-w-sm grow items-center">
+              <p className="truncate text-lg">{song.name}</p>
+              <p className="ml-3 whitespace-nowrap text-sm text-gray-400">Get link</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -67,9 +49,9 @@ export default function SongSection({ songs }: { songs: Songs }) {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="ml-3 flex h-3 w-3 items-center text-ellipsis text-gray-400"
               >
                 <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
