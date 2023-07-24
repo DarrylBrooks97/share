@@ -12,7 +12,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = params.slug
 
-  const ogImage = slug ? `/api/og?slug=${slug}` : "/api/og"
+  const ogImage = `/api/og?slug=${slug}`
 
   const [song] = await query<Song>(({ get }) => {
     get.song.where = {
@@ -46,6 +46,7 @@ export default async function SongPage({ params }: Props) {
   const slug = params.slug
   const spotify = new Spotify()
   const spotiyfPromise = spotify.getTrack(slug)
+
   const roninPromise = query<Song>(({ get }) => {
     get.song.where = {
       link: {

@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { Song, Songs } from "@ronin/playground"
 import { motion } from "framer-motion"
 
@@ -26,19 +26,16 @@ export const splitLink = (link: string, position: string = "start") => {
 }
 
 export default function SongSection({ songs }: { songs: Songs }) {
-  const page = useRouter()
-
-  const handleClick = (link: string) => {
+  const getId = (link: string) => {
     let id = ""
 
     if (link.includes("music.apple.com")) {
       id = splitLink(link, "end")
-      console.log({ id, link })
     } else {
       id = link.split("/").pop() as string
     }
 
-    page.push(`/song/${id}`)
+    return id
   }
 
   return (
@@ -51,10 +48,7 @@ export default function SongSection({ songs }: { songs: Songs }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut", delay: 0.1 * idx }}
         >
-          <div
-            className="relative h-16 w-16 overflow-clip rounded-md duration-300 ease-in-out hover:scale-105 hover:cursor-pointer"
-            onClick={() => handleClick(song.link)}
-          >
+          <div className="relative h-16 w-16 overflow-clip rounded-md duration-300 ease-in-out hover:scale-105">
             <Image
               src={song.cover}
               alt={`${song.name}-photo`}
@@ -63,9 +57,25 @@ export default function SongSection({ songs }: { songs: Songs }) {
             />
           </div>
           <div className="ml-3 flex h-fit max-w-fit grow flex-col justify-between text-ellipsis">
-            <div className="flex h-fit text-ellipsis ">
+            <Link href={`/song/${getId(song.link)}`} className="flex items-center">
               <p className="text-lg">{song.name}</p>
-            </div>
+              <p className="ml-3 text-sm text-gray-400">Get link</p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="ml-3 flex h-3 w-3 items-center text-ellipsis text-gray-400"
+              >
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+            </Link>
             <span className="text-base text-gray-400"> by {song.artist}</span>{" "}
             <div className="absolute right-2 top-2 h-6 w-6 overflow-clip rounded-full">
               <a href={splitLink(song.link)} target="_blank" referrerPolicy="no-referrer">
