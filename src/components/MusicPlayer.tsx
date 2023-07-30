@@ -28,7 +28,6 @@ export default function MusicPlayer({ link }: { link: string }) {
 
   return (
     <AnimatePresence mode="wait">
-      <h1 className="mt-5 text-center text-xl font-medium text-white">Last shared song</h1>
       {link && (
         <div className="flex h-3/4 w-full flex-col items-center justify-center self-center p-1 text-center">
           {player.type === "apple" ? (
