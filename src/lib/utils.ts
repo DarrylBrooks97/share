@@ -35,3 +35,7 @@ export const splitLink = (link: string, position: string = "start") => {
 
   return link
 }
+
+export const idiFy = (link: string) => {
+  return link.includes("music.apple.com") ? splitLink(link, "end") : splitLink(link).split("/")[4]
+}

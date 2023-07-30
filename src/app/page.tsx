@@ -1,6 +1,10 @@
 import { Suspense } from "react"
-import type { Songs } from "@ronin/playground"
-import { getCursors } from "~/lib/utils"
+import Image from "next/image"
+import type { Song, Songs } from "@ronin/playground"
+import MusicPlayer from "~/components/MusicPlayer"
+import NextImage from "~/components/ui/image"
+import { Spotify } from "~/lib/clients/spotify"
+import { getCursors, idiFy, splitLink } from "~/lib/utils"
 import query from "ronin"
 
 import AddSongForm from "../components/AddSongForm"
@@ -20,11 +24,17 @@ const LIMIT = 5
 const HomePageUI = async ({ cursors }: { cursors: (number | undefined)[] }) => {
   const [before, after] = cursors
 
-  const [songs] = await query<Songs>(({ get }) => {
+  const [songs, [latestSong]] = await query<[Songs, Songs]>(({ get }) => {
     get.songs = {
       before,
       after,
       limitedTo: LIMIT,
+      orderedBy: {
+        descending: ["ronin.createdAt"],
+      },
+    }
+    get.songs = {
+      limitedTo: 1,
       orderedBy: {
         descending: ["ronin.createdAt"],
       },
@@ -35,8 +45,10 @@ const HomePageUI = async ({ cursors }: { cursors: (number | undefined)[] }) => {
 
   return (
     <>
-      <p className="mt-4 text-xl text-gray-300">All shared music </p>
-      <SongSection songs={songs as any} />
+      <div className="flex w-full flex-col space-y-3 ">
+        <MusicPlayer link={latestSong.link} />
+        <SongSection songs={songs as any} />
+      </div>
       <PageNavigation backCursor={moreBefore} nextCursor={moreAfter} />
     </>
   )

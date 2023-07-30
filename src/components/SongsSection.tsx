@@ -22,6 +22,7 @@ export default function SongSection({ songs }: { songs: Songs }) {
 
   return (
     <div className="flex w-full flex-col gap-3 pt-3 text-white">
+      <p className="mt-4 text-xl text-gray-300">All shared music </p>
       {songs.map((song, idx) => (
         <motion.div
           className="relative flex w-full rounded-md border border-white border-opacity-60 p-2"
