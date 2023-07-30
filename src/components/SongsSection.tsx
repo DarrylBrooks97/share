@@ -31,7 +31,7 @@ export default function SongSection({ songs }: { songs: Songs }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut", delay: 0.1 * idx }}
         >
-          <div className="relative h-16 w-16 overflow-clip rounded-md duration-300 ease-in-out hover:scale-105">
+          <div className="relative h-24 w-24 min-w-[96px] overflow-clip rounded-md duration-300 ease-in-out hover:scale-105">
             <Image
               src={song.cover}
               alt={`${song.name}-photo`}
@@ -41,7 +41,9 @@ export default function SongSection({ songs }: { songs: Songs }) {
           </div>
           <div className="ml-3 flex h-fit w-full grow flex-col justify-between">
             <Link href={`/song/${getId(song.link)}`} className="flex max-w-sm grow items-center">
-              <p className="truncate text-lg">{song.name}</p>
+              <div className="w-1/2  md:w-full">
+                <p className="truncate text-lg">{song.name}</p>
+              </div>
               <p className="ml-3 whitespace-nowrap text-sm text-gray-400">Get link</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
