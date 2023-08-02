@@ -24,7 +24,7 @@ const LIMIT = 5
 const HomePageUI = async ({ cursors }: { cursors: (number | undefined)[] }) => {
   const [before, after] = cursors
 
-  const [songs, [latestSong]] = await query<[Songs, Songs]>(({ get }) => {
+  const [songs, latestSongs] = await query<[Songs, Songs]>(({ get }) => {
     get.songs = {
       before,
       after,
@@ -34,7 +34,7 @@ const HomePageUI = async ({ cursors }: { cursors: (number | undefined)[] }) => {
       },
     }
     get.songs = {
-      limitedTo: 1,
+      limitedTo: 5,
       orderedBy: {
         descending: ["ronin.createdAt"],
       },
@@ -47,8 +47,8 @@ const HomePageUI = async ({ cursors }: { cursors: (number | undefined)[] }) => {
     <>
       <div className="flex w-full flex-col space-y-3">
         <div>
-          <h1 className="mt-5 text-center text-xl font-medium text-white">Last shared song</h1>
-          <MusicPlayer link={latestSong.link} />
+          <h1 className="mt-5 text-center text-xl font-medium text-white">Last shared songs</h1>
+          <MusicPlayer links={latestSongs.map((song) => song.link)} />
         </div>
         <SongSection songs={songs as any} />
       </div>

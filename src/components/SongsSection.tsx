@@ -21,12 +21,12 @@ export default function SongSection({ songs }: { songs: Songs }) {
   }
 
   return (
-    <div className="flex w-full flex-col gap-3 pt-3 text-white">
+    <div className="flex w-full flex-col gap-3  text-white">
       <p className="mt-4 text-xl text-gray-300">All shared music </p>
       {songs.map((song, idx) => (
         <motion.div
           className="relative flex w-full rounded-md border border-white border-opacity-60 p-2"
-          key={song.link}
+          key={song.id}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut", delay: 0.1 * idx }}
