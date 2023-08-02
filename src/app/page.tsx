@@ -45,7 +45,7 @@ const HomePageUI = async ({ cursors }: { cursors: (number | undefined)[] }) => {
 
   return (
     <>
-      <div className="flex w-full flex-col space-y-3 ">
+      <div className="flex w-full flex-col space-y-3">
         <div>
           <h1 className="mt-5 text-center text-xl font-medium text-white">Last shared song</h1>
           <MusicPlayer link={latestSong.link} />
