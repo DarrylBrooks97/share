@@ -21,7 +21,7 @@ type HomePageProps = {
 
 const LIMIT = 5
 
-const HomePageUI = async ({ cursors }: { cursors: (number | undefined)[] }) => {
+const HomePageUI = async ({ cursors }: { cursors: readonly [string, string] }) => {
   const [before, after] = cursors
 
   const [songs, latestSongs] = await query<[Songs, Songs]>(({ get }) => {

@@ -14,7 +14,7 @@ export const getCursors = ({
   const before = searchParams.before
   const after = searchParams.after
 
-  return [before ? Number(before) : undefined, after ? Number(after) : undefined]
+  return [before as string, after as string] as const
 }
 
 export const getPlatformImage = (song: Song) => {
